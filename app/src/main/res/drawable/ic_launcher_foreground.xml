@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 临时占位图标：下载箭头 + 底部横线（正式图标待定） -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <group
+        android:scaleX="0.5"
+        android:scaleY="0.5"
+        android:translateX="27"
+        android:translateY="27">
+        <path
+            android:fillColor="#FFFFFFFF"
+            android:pathData="M54,18 L62,18 L62,54 L76,54 L54,80 L32,54 L46,54 Z" />
+        <path
+            android:fillColor="#FFFFFFFF"
+            android:pathData="M26,88 L82,88 A4,4 0 0 0 82,80 L26,80 A4,4 0 0 0 26,88 Z" />
+    </group>
+</vector>
