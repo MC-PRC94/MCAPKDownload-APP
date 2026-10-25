@@ -14,8 +14,8 @@ android {
         // Android 5.0 起：依赖 core library desugaring 补齐 java.time/Optional/nio.file 等 API
         minSdk = 21
         targetSdk = 34
-        versionCode = 24
-        versionName = "1.3.3"
+        versionCode = 26
+        versionName = "1.3.4"
     }
 
     // 输出 APK 文件名：MCDLAPP {版本号}.apk（如 MCDLAPP 1.1.0-beta2.apk）
