@@ -1,6 +1,6 @@
 # Minecraft安卓下载站
 
-一个 Minecraft 安卓版本的下载工具，帮助玩家快速获取各版本游戏安装包。
+本软件是一个 Minecraft 安卓版本的下载工具，帮助玩家快速获取各版本游戏安装包，欢迎各位提供反馈。
 
 > 声明与安装包来源说明：见 [legal/statement.txt](legal/statement.txt)。
 
@@ -22,7 +22,7 @@
 2. 用 Android Studio（或命令行 `./gradlew assembleDebug`）构建
 3. 产物位于 `app/build/outputs/apk/debug/`
 
-技术栈：Kotlin + Jetpack Compose（Material 3），最低 API 21。
+技术栈：Kotlin + Jetpack Compose（Material 3），最低 API 21
 
 ## 免责声明
 
