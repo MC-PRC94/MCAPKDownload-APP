@@ -2,7 +2,7 @@
 
 本软件是一个 Minecraft 安卓版本的下载工具，帮助玩家快速获取各版本游戏安装包，欢迎各位提供反馈。
 
-> 声明与安装包来源说明：见 [legal/statement.txt](legal/statement.txt)。 
+> 声明与安装包来源说明：见 [legal/statement.txt](legal/statement.txt)。
 
 ## 功能
 
