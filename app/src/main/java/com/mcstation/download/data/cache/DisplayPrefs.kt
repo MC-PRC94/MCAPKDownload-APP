@@ -19,6 +19,7 @@ object DisplayPrefs {
     private const val FILE = "display_prefs"
     private const val KEY_FONT_SCALE = "font_scale"
     private const val KEY_UI_SCALE = "ui_scale"
+    private const val KEY_THEME_COLOR = "theme_color"
 
     /** 字体大小可选范围：80% ~ 140%，步进 10% */
     const val MIN_FONT_SCALE = 0.8f
@@ -36,6 +37,9 @@ object DisplayPrefs {
     /** 当前界面缩放（Compose 可观察状态，默认 100%） */
     val uiScale = mutableStateOf(1f)
 
+    /** 自定义主题色 id（Theme.kt 的 ThemeColorOptions），null = 默认紫 */
+    val themeColorId = mutableStateOf<String?>(null)
+
     @Volatile
     private var loaded = false
 
@@ -46,6 +50,7 @@ object DisplayPrefs {
         val sp = context.applicationContext.getSharedPreferences(FILE, Context.MODE_PRIVATE)
         fontScale.value = sp.getFloat(KEY_FONT_SCALE, 1f).coerceIn(MIN_FONT_SCALE, MAX_FONT_SCALE)
         uiScale.value = sp.getFloat(KEY_UI_SCALE, 1f).coerceIn(MIN_UI_SCALE, MAX_UI_SCALE)
+        themeColorId.value = sp.getString(KEY_THEME_COLOR, null)
     }
 
     fun setFontScale(context: Context, value: Float) {
@@ -58,6 +63,12 @@ object DisplayPrefs {
         val v = value.coerceIn(MIN_UI_SCALE, MAX_UI_SCALE)
         uiScale.value = v
         sp(context).edit().putFloat(KEY_UI_SCALE, v).apply()
+    }
+
+    /** 切换主题色（传 null 恢复默认紫），立即全局重组生效 */
+    fun setThemeColor(context: Context, id: String?) {
+        themeColorId.value = id
+        sp(context).edit().putString(KEY_THEME_COLOR, id).apply()
     }
 
     /** 恢复默认（100% / 100%） */

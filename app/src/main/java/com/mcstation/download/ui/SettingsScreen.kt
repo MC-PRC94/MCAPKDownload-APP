@@ -4,7 +4,9 @@ package com.mcstation.download.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -21,6 +23,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Code
 import androidx.compose.material.icons.filled.Description
 import androidx.compose.material.icons.filled.Download
@@ -45,6 +48,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -56,6 +60,8 @@ import androidx.compose.foundation.layout.heightIn
 import com.mcstation.download.BuildConfig
 import com.mcstation.download.data.cache.DisplayPrefs
 import com.mcstation.download.data.cache.DownloadPrefs
+import com.mcstation.download.ui.theme.DEFAULT_THEME_COLOR_ID
+import com.mcstation.download.ui.theme.ThemeColorOptions
 import com.mcstation.download.ui.theme.Primary
 import kotlin.math.roundToInt
 
@@ -160,6 +166,63 @@ fun SettingsScreen(
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.outline,
             )
+
+            Spacer(Modifier.height(12.dp))
+
+            // ================= 自定义主题色 =================
+            // 点击色块立即全局生效（Theme.kt 读取 DisplayPrefs.themeColorId 重建配色），默认紫可恢复
+            val currentThemeId = DisplayPrefs.themeColorId.value
+            Text(
+                "自定义主题色",
+                style = MaterialTheme.typography.bodyMedium,
+            )
+            Text(
+                "应用按钮、开关与强调色的主色调",
+                style = MaterialTheme.typography.labelSmall,
+                color = MaterialTheme.colorScheme.outline,
+            )
+            Spacer(Modifier.height(10.dp))
+            Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                ThemeColorOptions.forEach { option ->
+                    val selected =
+                        if (option.id == DEFAULT_THEME_COLOR_ID) currentThemeId == null
+                        else currentThemeId == option.id
+                    Box(
+                        modifier = Modifier
+                            .size(34.dp)
+                            .clip(CircleShape)
+                            .background(option.swatch)
+                            .border(
+                                width = if (selected) 2.dp else 1.dp,
+                                brush = Brush.linearGradient(
+                                    listOf(
+                                        if (selected) MaterialTheme.colorScheme.primary
+                                        else MaterialTheme.colorScheme.outline.copy(alpha = 0.45f),
+                                        if (selected) MaterialTheme.colorScheme.primary
+                                        else MaterialTheme.colorScheme.outline.copy(alpha = 0.45f),
+                                    ),
+                                ),
+                                shape = CircleShape,
+                            )
+                            .clickable {
+                                DisplayPrefs.setThemeColor(
+                                    context,
+                                    if (option.id == DEFAULT_THEME_COLOR_ID) null else option.id,
+                                )
+                            },
+                        contentAlignment = Alignment.Center,
+                    ) {
+                        if (selected) {
+                            Icon(
+                                Icons.Filled.Check,
+                                contentDescription = option.label,
+                                tint = Color.White,
+                                modifier = Modifier.size(16.dp),
+                            )
+                        }
+                    }
+                }
+            }
 
             Row(
                 modifier = Modifier.fillMaxWidth(),
