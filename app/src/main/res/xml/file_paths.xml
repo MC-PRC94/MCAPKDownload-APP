@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- FileProvider 共享路径：App 私有外部目录 download/ 下的 APK 文件 -->
+<paths>
+    <external-files-path
+        name="download"
+        path="download/" />
+    <external-files-path
+        name="update"
+        path="update/" />
+</paths>

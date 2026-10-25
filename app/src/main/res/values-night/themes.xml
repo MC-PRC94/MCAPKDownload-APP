@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 深色模式启动主题：深色窗口背景（避免启动瞬间白屏闪烁），状态栏与界面背景同色 -->
+    <style name="Theme.MCDownloadStation" parent="android:Theme.Material.NoActionBar">
+        <item name="android:statusBarColor">#141218</item>
+    </style>
+</resources>
