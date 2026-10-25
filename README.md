@@ -1,8 +1,8 @@
-# MC 下载站（MCDLAPP）
+# Minecraft安卓下载站
 
 一个 Minecraft 安卓版本的下载工具，帮助玩家快速获取各版本游戏安装包。
 
-> 声明与安装包来源说明：见 [legal/statement.txt](legal/statement.txt)（应用内「设置 → 声明」会自动同步本文件）。
+> 声明与安装包来源说明：见 [legal/statement.txt](legal/statement.txt)。
 
 ## 功能
 
@@ -10,9 +10,6 @@
 - **包干净**：提供去验证包，纯净无病毒、无需正版账号
 - **下载快**：多线程分段下载（1~16 线程可调）+ 断点续传
 - **一条龙**：应用内下载 → 安装，装完可自动清理安装包
-- **数据保管**：跨渠道换装前一键备份游戏数据（存档、资源包等），装好后再回填
-- **应用自更新**：有新版本应用内直接升级
-- 深色模式 / 字号与界面缩放自定义
 
 ## 系统要求
 
@@ -27,11 +24,6 @@
 
 技术栈：Kotlin + Jetpack Compose（Material 3），最低 API 21。
 
-## 相关链接
-
-- 声明在线版：https://github.com/MC-PRC94/MCAPKDownload-APP/blob/main/legal/statement.txt
-
 ## 免责声明
 
-本项目与 Mojang Studios / Microsoft 无关联，Minecraft 是 Mojang Studios 的商标。
-本工具不提供任何破解内容，安装包均来源于公开渠道，详见声明文件。
+详见声明文件 [legal/statement.txt](legal/statement.txt)
