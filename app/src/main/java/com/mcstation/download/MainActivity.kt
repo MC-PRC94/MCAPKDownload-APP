@@ -573,6 +573,7 @@ fun MainApp(viewModel: AppViewModel) {
     var showFileManager by remember { mutableStateOf(false) }
     var showAbout by remember { mutableStateOf(false) }
     var showStatement by remember { mutableStateOf(false) }
+    var showLicense by remember { mutableStateOf(false) }
 
     val detailVersion = viewModel.versions.firstOrNull { it.version == detailVersionId }
     val inDetail = detailVersion != null
@@ -608,9 +609,10 @@ fun MainApp(viewModel: AppViewModel) {
         detailVersionId = null
     }
 
-    // 设置页时：按返回键 = 回到下载页（声明页/关于页打开时优先关闭子页面）
+    // 设置页时：按返回键 = 回到下载页（声明页/关于页/开源许可页打开时优先关闭子页面）
     androidx.activity.compose.BackHandler(
-        enabled = !inDetail && currentTab == Tab.Settings && !showAbout && !showStatement,
+        enabled = !inDetail && currentTab == Tab.Settings &&
+            !showAbout && !showStatement && !showLicense,
     ) {
         currentTab = Tab.Download
     }
@@ -618,6 +620,11 @@ fun MainApp(viewModel: AppViewModel) {
     // 声明页打开时：按返回键 = 返回设置页
     androidx.activity.compose.BackHandler(enabled = showStatement) {
         showStatement = false
+    }
+
+    // 开源许可页打开时：按返回键 = 返回设置页
+    androidx.activity.compose.BackHandler(enabled = showLicense) {
+        showLicense = false
     }
 
     // 关于页打开时：按返回键 = 返回设置页
@@ -629,7 +636,7 @@ fun MainApp(viewModel: AppViewModel) {
     var showExitConfirm by remember { mutableStateOf(false) }
     androidx.activity.compose.BackHandler(
         enabled = !inDetail && currentTab == Tab.Download &&
-            !showDownloadPanel && !showFileManager && !showStatement && !showAbout,
+            !showDownloadPanel && !showFileManager && !showStatement && !showAbout && !showLicense,
     ) {
         showExitConfirm = true
     }
@@ -799,6 +806,7 @@ fun MainApp(viewModel: AppViewModel) {
                                 viewModel = viewModel,
                                 onAboutClick = { showAbout = true },
                                 onStatementClick = { showStatement = true },
+                                onLicenseClick = { showLicense = true },
                             )
                         }
                     }
@@ -876,6 +884,23 @@ fun MainApp(viewModel: AppViewModel) {
             com.mcstation.download.ui.StatementScreen(
                 viewModel = viewModel,
                 onBack = { showStatement = false },
+            )
+        }
+    }
+
+    // ---------- 开源许可页：全屏覆盖，从右侧滑入（返回设置页） ----------
+    androidx.compose.animation.AnimatedVisibility(
+        visible = showLicense,
+        enter = slideInHorizontally(tween(300)) { it } + fadeIn(tween(300)),
+        exit = slideOutHorizontally(tween(250)) { it } + fadeOut(tween(250)),
+    ) {
+        Box(
+            Modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.surface),
+        ) {
+            com.mcstation.download.ui.LicenseScreen(
+                onBack = { showLicense = false },
             )
         }
     }

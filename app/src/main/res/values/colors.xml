@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 启动图标背景色（品牌紫，与 Material3 primary 同源） -->
+    <color name="launcher_background">#FF6750A4</color>
+</resources>

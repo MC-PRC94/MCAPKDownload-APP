@@ -21,6 +21,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material.icons.filled.Code
 import androidx.compose.material.icons.filled.Description
 import androidx.compose.material.icons.filled.Download
 import androidx.compose.material3.AlertDialog
@@ -65,7 +66,7 @@ import kotlin.math.roundToInt
  *  [通用]     字体大小 + 显示尺寸 + 清理缓存 + 运行日志
  *  [下载设置] 默认线程数滑块 + 默认"装后删除"开关（记忆用户选择）
  *  [检查更新] 自动检查更新开关 + 手动检查按钮（点击先选检查范围：正式版 / 全部）
- *  [声明]     入口行（点击进入独立"声明"页面，正文在 assets/statement.txt）
+ *  [声明]     声明入口行（进入独立"声明"页）+ 开源许可入口行（进入独立"开源许可"页）
  *  [关于]     入口行（点击进入独立"关于"页面）
  */
 @Composable
@@ -74,6 +75,7 @@ fun SettingsScreen(
     modifier: Modifier = Modifier,
     onAboutClick: () -> Unit = {},
     onStatementClick: () -> Unit = {},
+    onLicenseClick: () -> Unit = {},
 ) {
     val context = LocalContext.current
     var autoCheck by remember { mutableStateOf(DownloadPrefs.autoCheckUpdate(context)) }
@@ -304,6 +306,52 @@ fun SettingsScreen(
                     )
                     Text(
                         "版权、来源、隐私与免责声明",
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.outline,
+                    )
+                }
+                Icon(
+                    Icons.Filled.ArrowForward,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.outline,
+                    modifier = Modifier.size(18.dp),
+                )
+            }
+
+            // ---------- 开源许可入口行 ----------
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable(onClick = onLicenseClick),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Box(
+                    modifier = Modifier
+                        .size(44.dp)
+                        .background(
+                            brush = Brush.linearGradient(
+                                listOf(Color(0xFF7C5CC4), Primary),
+                            ),
+                            shape = RoundedCornerShape(12.dp),
+                        ),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    Icon(
+                        Icons.Filled.Code,
+                        contentDescription = null,
+                        tint = Color.White,
+                        modifier = Modifier.size(22.dp),
+                    )
+                }
+                Spacer(Modifier.width(12.dp))
+                Column(Modifier.weight(1f)) {
+                    Text(
+                        "开源许可",
+                        style = MaterialTheme.typography.bodyMedium,
+                        fontWeight = FontWeight.Medium,
+                    )
+                    Text(
+                        "本应用使用的第三方开源库与许可证",
                         style = MaterialTheme.typography.labelSmall,
                         color = MaterialTheme.colorScheme.outline,
                     )
