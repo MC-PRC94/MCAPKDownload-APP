@@ -26,4 +26,4 @@
 
 ## 免责声明
 
-详见声明文件 [legal/statement.txt](legal/statement.txt)
+[legal/statement.txt](legal/statement.txt)
